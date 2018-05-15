@@ -17,6 +17,9 @@ import { ReadmePageComponent } from './ui/readme-page/readme-page.component';
 import { UserLoginComponent } from './ui/user-login/user-login.component';
 import { AuthService } from './core/auth.service';
 import { NotifyService } from './core/notify.service';
+import { UserFormComponent } from './ui/user-form/user-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserProfileComponent } from './ui/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -24,10 +27,14 @@ import { NotifyService } from './core/notify.service';
     AppComponent,
     TopNavComponent,
     ReadmePageComponent,
-    UserLoginComponent,        
+    UserLoginComponent,
+    UserFormComponent,
+    UserProfileComponent,        
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     AngularFireModule.initializeApp(environment.firebase,'services-log-app'),
