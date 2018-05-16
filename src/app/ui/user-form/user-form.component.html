@@ -4,6 +4,24 @@
   <p class="button is-small" (click)="toggleForm()">Already Registered?</p>
   <hr>
 
+  <!-- <label for="username">User Name</label>
+  <input type="username" id="username" class="input"
+         formControlName="username" (keyup)="checkUsername($event)" required 
+         
+         >
+
+  <div *ngIf="formErrors.username " class="notification is-danger">
+    {{ formErrors.username }}
+  </div>
+
+  <p class="help is-success" *ngIf="usernameAvailable && usernameText">
+    @{{usernameText}} is available
+  </p>
+
+  <p class="help is-danger" *ngIf="!usernameAvailable && usernameText">
+    @{{usernameText}} has already been taken
+  </p> -->
+
   <label for="email">Email</label>
   <input type="email" id="email" class="input"
          formControlName="email" required >

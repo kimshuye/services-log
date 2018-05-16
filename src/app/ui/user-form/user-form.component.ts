@@ -44,7 +44,7 @@ export class UserFormComponent implements OnInit {
   }
 
   signup() {
-    this.auth.emailSignUp(this.userForm.value['email'], this.userForm.value['password']);
+    this.auth.emailSignUp(this.userForm.value['email'], this.userForm.value['password'],"sunadmin");
   }
 
   login() {
@@ -95,4 +95,16 @@ export class UserFormComponent implements OnInit {
       }
     }
   }
+
+  usernameText;
+  usernameAvailable:boolean;
+
+  checkUsername(event: any){
+    this.usernameText = event.target.value;
+    this.auth.checkUsername(this.usernameText).subscribe(username => {
+      this.usernameAvailable = ! username.uid
+      console.log(username.uid);
+    });
+  }
+
 }

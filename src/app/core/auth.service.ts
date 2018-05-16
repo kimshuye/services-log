@@ -8,32 +8,46 @@ import { NotifyService } from './notify.service';
 
 import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators';
+import { AngularFireDatabase, AngularFireObject, AngularFireList } from 'angularfire2/database';
 
 interface User {
-  uid: string;
+  uid?: string;
+  username?: string;
   email?: string | null;
   photoURL?: string;
   displayName?: string;
+}
+
+interface UserDb {
+  $username:string;
+  uid?:string;
 }
 
 @Injectable()
 export class AuthService {
 
   user: Observable<User | null>;
+  currentUser:UserDb;
 
   constructor(private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
+              private db:AngularFireDatabase,
               private router: Router,
               private notify: NotifyService) {
 
     this.user = this.afAuth.authState
       .switchMap((user) => {
         if (user) {
+          // this.currentUser.uid = user.uid;
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
+          // this.currentUser.uid = null;
           return Observable.of(null);
         }
       });
+      // this.user.subscribe(user => {
+      //   this.currentUser.$username = user.username;
+      // });
   }
 
   ////// OAuth Methods /////
@@ -84,10 +98,11 @@ export class AuthService {
 
   //// Email/Password Auth ////
 
-  emailSignUp(email: string, password: string) {
+  emailSignUp(email: string, password: string,username:string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         this.notify.update('Welcome to Firestarter!!!', 'success');
+        user.username = username;
         return this.updateUserData(user); // if using firestore
       })
       .catch((error) => this.handleError(error) );
@@ -130,10 +145,41 @@ export class AuthService {
 
     const data: User = {
       uid: user.uid,
+      username: user.username || null,
       email: user.email || null,
       displayName: user.displayName || 'nameless user',
       photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ',
     };
+    
+    // const data1 = {
+    //   email: user.email || null,
+    //   username: user.username || null
+    // };
+    
+    // var update1 = {};
+    // update1[`/users/${user.uid}`] = data1;
+    // this.db.database.ref().update(update1);
+
+    // const data2 = {
+    //   uid: user.uid
+    // };
+    
+    // var update2 = {};
+    // update2[`/usernames/${user.username}`] = data2;
+    // this.db.database.ref().update(update2);
+
     return userRef.set(data);
   }
+
+  get hasUsername() {
+    return this.currentUser.$username ? true : false
+  }
+
+  checkUsername(username:string){
+    username = username.toLowerCase();
+    return this.db.object(`usernames/${username}` )
+      .snapshotChanges()
+      .map(c => ({ $username: c.payload.key, ...c.payload.val() }));
+  }
+
 }
