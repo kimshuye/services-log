@@ -1,17 +1,17 @@
-<form [formGroup]="userForm"  *ngIf="newUser"  (ngSubmit)="signup()">
+<form [formGroup]="userFormSignup"  *ngIf="newUser"  (ngSubmit)="signup()">
 
   <h3>New User Signup</h3>
   <p class="button is-small" (click)="toggleForm()">Already Registered?</p>
   <hr>
 
-  <!-- <label for="username">User Name</label>
+  <label for="username">User Name</label>
   <input type="username" id="username" class="input"
          formControlName="username" (keyup)="checkUsername($event)" required 
          
          >
 
-  <div *ngIf="formErrors.username " class="notification is-danger">
-    {{ formErrors.username }}
+  <div *ngIf="SignupformErrors.username " class="notification is-danger">
+    {{ SignupformErrors.username }}
   </div>
 
   <p class="help is-success" *ngIf="usernameAvailable && usernameText">
@@ -20,26 +20,26 @@
 
   <p class="help is-danger" *ngIf="!usernameAvailable && usernameText">
     @{{usernameText}} has already been taken
-  </p> -->
+  </p>
 
   <label for="email">Email</label>
   <input type="email" id="email" class="input"
          formControlName="email" required >
 
-  <div *ngIf="formErrors.email" class="notification is-danger">
-    {{ formErrors.email }}
+  <div *ngIf="SignupformErrors.email" class="notification is-danger">
+    {{ SignupformErrors.email }}
   </div>
 
   <label for="password">Password</label>
   <input type="password" id="password" class="input"
          formControlName="password" required >
 
-  <div *ngIf="formErrors.password" class="notification is-danger">
-    {{ formErrors.password }}
+  <div *ngIf="SignupformErrors.password" class="notification is-danger">
+    {{ SignupformErrors.password }}
   </div>
 
-  <div *ngIf="userForm.valid" class="notification is-success">Form is valid</div>
-  <button type="submit" class="button" [disabled]="!userForm.valid">Submit</button>
+  <div *ngIf="userFormSignup.valid" class="notification is-success">Form is valid</div>
+  <button type="submit" class="button" [disabled]="!userFormSignup.valid">Submit</button>
 
 </form>
 

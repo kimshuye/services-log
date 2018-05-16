@@ -45,9 +45,11 @@ export class AuthService {
           return Observable.of(null);
         }
       });
-      // this.user.subscribe(user => {
-      //   this.currentUser.$username = user.username;
-      // });
+      this.user.subscribe(user => {
+        // if (user) {
+        //   this.currentUser.$username = user.username;
+        // }
+      });
   }
 
   ////// OAuth Methods /////
@@ -151,22 +153,22 @@ export class AuthService {
       photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ',
     };
     
-    // const data1 = {
-    //   email: user.email || null,
-    //   username: user.username || null
-    // };
+    const data1 = {
+      email: user.email ,
+      username: user.username 
+    };
     
-    // var update1 = {};
-    // update1[`/users/${user.uid}`] = data1;
-    // this.db.database.ref().update(update1);
+    var update1 = {};
+    update1[`/users/${user.uid}`] = data1;
+    this.db.database.ref().update(update1);
 
-    // const data2 = {
-    //   uid: user.uid
-    // };
+    const data2 = {
+      uid: user.uid
+    };
     
-    // var update2 = {};
-    // update2[`/usernames/${user.username}`] = data2;
-    // this.db.database.ref().update(update2);
+    var update2 = {};
+    update2[`/usernames/${user.username}`] = data2;
+    this.db.database.ref().update(update2);
 
     return userRef.set(data);
   }
