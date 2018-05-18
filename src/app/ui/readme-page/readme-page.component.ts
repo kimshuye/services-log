@@ -30,16 +30,13 @@ export const MY_CUSTOM_FORMATS = {
   styleUrls: ['./readme-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    // The locale would typically be provided on the root module of your application. We do it at
-    // the component level here, due to limitations of our example generation script.
-    {provide: MAT_DATE_LOCALE, useValue: 'ja-JP'},
-
-    // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
-    // `MatMomentDateModule` in your applications root module. We provide it at the component level
+    // `MomentDateTimeAdapter` can be automatically provided by importing
+    // `OwlMomentDateTimeModule` in your applications root module. We provide it at the component level
     // here, due to limitations of our example generation script.
-    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
-  ],
+    {provide: DateTimeAdapter, useClass: MomentDateTimeAdapter, deps: [OWL_DATE_TIME_LOCALE]},
+
+    {provide: OWL_DATE_TIME_FORMATS, useValue: MY_CUSTOM_FORMATS},
+],
 })
 export class ReadmePageComponent implements OnInit {
 
@@ -47,6 +44,8 @@ export class ReadmePageComponent implements OnInit {
   fixedTimezone = '2015-06-15T09:03:01+0700';
 
   dp;
+
+  public dateTime = new _moment();
 
   constructor(private adapter: DateAdapter<any>) { 
     // this.adapter.setLocale('th');
@@ -70,7 +69,7 @@ export class ReadmePageComponent implements OnInit {
 
     this.adapter.format(date,'input');
     console.log(dateVal);
-    
+
   }
 
 }

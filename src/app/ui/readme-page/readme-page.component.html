@@ -25,8 +25,8 @@
         <input placeholder="Date Time:"
                [(ngModel)]="dateTime"
                [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
-        <owl-date-time #dt></owl-date-time>
+        <owl-date-time #dt ></owl-date-time>
     </label>
 
-    <h4>Value From Picker: {{dateTime | json}}</h4>
+    <h4>Value From Picker: {{dateTime | date:'yyyy-MM-ddTHH:mm:ss ':'+0700' }}</h4>
 </div>
