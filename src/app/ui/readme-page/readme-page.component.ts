@@ -15,7 +15,7 @@ import { MomentDateTimeAdapter } from 'ng-pick-datetime-moment';
 const _moment = (moment as any).default ? (moment as any).default : moment;
 
 export const MY_CUSTOM_FORMATS = {
-  parseInput: 'LL LT',
+  parseInput: 'YYYY-MM-ddTHH:mm:ss',
   fullPickerInput: 'LL LT',
   datePickerInput: 'LL',
   timePickerInput: 'LT',
