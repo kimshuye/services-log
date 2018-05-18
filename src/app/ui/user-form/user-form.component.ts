@@ -171,7 +171,7 @@ export class UserFormComponent implements OnInit {
     this.usernameText = event.target.value;
     this.auth.checkUsername(this.usernameText).subscribe(username => {
       this.usernameAvailable = ! username.uid
-      console.log(username.uid);
+      // console.log(username.uid);
     });
   }
 

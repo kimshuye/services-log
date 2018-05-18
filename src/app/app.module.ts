@@ -1,10 +1,32 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
+
+import {BrowserAnimationsModule,NoopAnimationsModule} from '@angular/platform-browser/animations';
+import 'hammerjs';
+
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+
+//Material design modules
+import {  
+  MatButtonModule,
+  MatCheckboxModule,
+  MatCardModule,
+  MatGridListModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatToolbarModule,
+  MatProgressSpinnerModule,
+  MatTabsModule,
+  MatListModule,
+  MatIconModule,
+
+ } from '@angular/material';
 
 import { environment } from '../environments/environment';
 // firebase configuration
@@ -18,7 +40,6 @@ import { UserLoginComponent } from './ui/user-login/user-login.component';
 import { AuthService } from './core/auth.service';
 import { NotifyService } from './core/notify.service';
 import { UserFormComponent } from './ui/user-form/user-form.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserProfileComponent } from './ui/user-profile/user-profile.component';
 
 
@@ -35,6 +56,10 @@ import { UserProfileComponent } from './ui/user-profile/user-profile.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
+
     AppRoutingModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     AngularFireModule.initializeApp(environment.firebase,'services-log-app'),
@@ -42,7 +67,38 @@ import { UserProfileComponent } from './ui/user-profile/user-profile.component';
     AngularFirestoreModule,
     AngularFireAuthModule,
     
+    MatButtonModule,
+    MatCheckboxModule,
+    MatCardModule,
+    MatGridListModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatListModule,
+    MatIconModule,
+
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
+    
   ],
+  exports: [
+    MatButtonModule,
+    MatCheckboxModule,
+    MatCardModule,
+    MatGridListModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatListModule,
+    MatIconModule,
+  ],
+
   providers: [AuthService, NotifyService],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,32 @@
 <h1>Welcome to Firestarter!</h1>
 
 <p>I am a Progressive Web App (PWA) built with Angular and Firebase.</p>
+
+<!--output '2015-06-15 05:03 PM GMT+7'-->
+<p>The custom date is {{today | date:'yyyy-MM-dd HH:mm a z':'+0700'}}</p>
+
+<!--output '2015-06-15 09:03 AM GMT+7'-->
+<p>The custom date with fixed timezone is {{fixedTimezone | date:'yyyy-MM-dd HH:mm a z':'+0700'}}</p>
+
+<p ngNonBindable>{{ today | date: 'M/d/y' }}</p>
+<p>{{ today | date: 'M/d/y' }}</p>
+
+<mat-form-field>
+    <input matInput [matDatepicker]="dp" placeholder="Different locale">
+    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+    <mat-datepicker #dp (selectedChanged)="updateDate($event)"></mat-datepicker>
+</mat-form-field>
+
+<div class="example-wrapper">
+    <h2>Picker with Custom Format</h2>
+
+    <label class="example-input-wrapper">
+        Date Time:
+        <input placeholder="Date Time:"
+               [(ngModel)]="dateTime"
+               [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+        <owl-date-time #dt></owl-date-time>
+    </label>
+
+    <h4>Value From Picker: {{dateTime | json}}</h4>
+</div>
