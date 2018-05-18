@@ -69,8 +69,8 @@ export class ReadmePageComponent implements OnInit {
       ;
 
     this.adapter.format(date,'input');
-
     console.log(dateVal);
+    
   }
 
 }
